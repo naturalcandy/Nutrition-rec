@@ -10,8 +10,8 @@ export function SearchSpecification () {
     const fetchFood = (query, setFoodData) => {
       Axios.get('https://trackapi.nutritionix.com/v2/search/instant', {
       headers : {
-        'x-app-id' : 'hidden for security reasons',
-        'x-app-key' : 'hidden for security reasons'
+        'x-app-id' : 'hidden for security',
+        'x-app-key' : 'hidden for security'
         },
       params: {
           query: query,
@@ -24,14 +24,24 @@ export function SearchSpecification () {
       })
     }
     return (
-      <div>
-        <input value={query} placeholder="Search..." onChange={(event)=>setQuery(event.target.value)} />
-        <button onClick={() => fetchFood(query, setFoodData)}>Search</button>
-        <ul>
-          {foodData?.results.map(item => (
-            <li key = {item.id}>{item.name}</li>
-          ))}
-        </ul>
-      </div>
-    )
+        <div>
+          <form onSubmit={event => {
+              event.preventDefault()
+              fetchFood(query, setFoodData)}}>
+    
+          <input value={query} placeholder="Search..." onChange={(event)=>setQuery(event.target.value)} />
+          
+          <button type="submit">Search</button>
+          </form>
+          {foodData == null ? (
+              'Loading...'
+          ) : (
+            //map food id with its brand + item name
+          <ul>
+            {foodData.branded.map(item => (
+              <li key = {item.nix_item_id}>{item.brand_name_item_name}</li>
+            ))}
+          </ul>)}
+        </div>
+      )
   }
