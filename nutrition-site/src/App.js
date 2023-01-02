@@ -1,13 +1,19 @@
 import './App.css';
+import React, { useState } from 'react';
+import {SearchSpecification} from './NutriSearch'
+
+
+
 
 function App() {
   return (
+
     <div className="App">
       <Header1 />
       <RecipeOrResturaunt />
       <FirstButtonMenu />
       <UserInputMacros />
-      <SearchBar />
+      <SearchSpecification />
 
     </div>
   );
@@ -49,7 +55,8 @@ const FirstButtonMenu = () => {
   )
 }
 
-
+//UI Component that gets bare minimum forms for
+//client's desired macro ranges. 
 const UserInputMacros = () => {
   return (
     <form class="macroForm">
@@ -74,7 +81,3 @@ const UserInputMacros = () => {
     </form>
   )
 }
-
-const SearchBar = () => {
-  return <input type="search" className="search-bar" placeholder="Search..." />;
-};
